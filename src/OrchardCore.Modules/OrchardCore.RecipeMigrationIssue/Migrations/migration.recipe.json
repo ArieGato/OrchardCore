@@ -8,28 +8,54 @@
   "issetuprecipe": false,
   "categories": "",
   "tags": [],
-  "variables": {
-    "categoriesContentItemId": "[js:uuid()]",
-    "categoryTravelContentItemId": "[js:uuid()]"
-  },
+  "variables": {},
   "steps": [
     {
       "name": "ContentDefinition",
       "ContentTypes": [
         {
-          "Name": "Category",
-          "DisplayName": "Category",
+          "Name": "Article2",
+          "DisplayName": "Article2",
+          "Hidden": false,
           "Settings": {
-            "ContentTypeSettings": {},
-            "FullTextAspectSettings": {}
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Draftable": true,
+              "Versionable": true,
+              "Listable": true
+            }
           },
           "ContentTypePartDefinitionRecords": [
             {
-              "PartName": "Category",
-              "Name": "Category",
+              "PartName": "Article2",
+              "Name": "Article2",
               "Settings": {
                 "ContentTypePartSettings": {
+                  "Position": "3"
+                }
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "AutoroutePartSettings": {
+                  "AllowCustomPath": true,
+                  "Pattern": "{{ Model.ContentItem | display_text | slugify }}",
+                  "ShowHomepageOption": true
+                },
+                "ContentTypePartSettings": {
                   "Position": "1"
+                }
+              }
+            },
+            {
+              "PartName": "HtmlBodyPart",
+              "Name": "HtmlBodyPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Editor": "Wysiwyg",
+                  "Position": "2"
                 }
               }
             },
@@ -41,18 +67,22 @@
                   "Position": "0"
                 }
               }
-            },
+            }
+          ]
+        }
+      ],
+      "ContentParts": [
+        {
+          "Name": "Article2",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
             {
-              "PartName": "AutoroutePart",
-              "Name": "AutoroutePart",
+              "FieldName": "TextField",
+              "Name": "Subtitle",
               "Settings": {
-                "ContentTypePartSettings": {
-                  "Position": "2"
-                },
-                "AutoroutePartSettings": {
-                  "AllowCustomPath": true,
-                  "Pattern": "{{ Model.ContentItem | display_text | slugify }}",
-                  "ManageContainedItemRoutes": true
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Subtitle",
+                  "Position": "0"
                 }
               }
             }
@@ -62,46 +92,27 @@
     },
     {
       "name": "content",
-      "data": [
+      "Data": [
         {
-          "ContentItemId": "[js: variables('categoriesContentItemId')]",
-          "ContentType": "Taxonomy",
-          "DisplayText": "Categories",
+          "ContentItemId": "[js: uuid()]",
+          "ContentType": "Article2",
+          "DisplayText": "About2",
           "Latest": true,
           "Published": true,
-          "TitlePart": {
-            "Title": "Categories"
-          },
-          "AliasPart": {
-            "Alias": "categories"
-          },
-          "TaxonomyPart": {
-            "Terms": [
-              {
-                "ContentItemId": "[js: variables('categoryTravelContentItemId')]",
-                "ContentType": "Category",
-                "DisplayText": "Travel",
-                "Category": {
-                  "Icon": {
-                    "Text": "fas fa-globe-americas"
-                  }
-                },
-                "TitlePart": {
-                  "Title": "Travel"
-                },
-                "AutoroutePart": {
-                  "Path": "travel"
-                },
-                "TermPart": {
-                  "TaxonomyContentItemId": "[js: variables('categoriesContentItemId')]"
-                }
-              }
-            ],
-            "TermContentType": "Category"
-          },
           "AutoroutePart": {
-            "Path": "categories",
-            "RouteContainedItems": true
+            "Path": "about",
+            "SetHomepage": false
+          },
+          "HtmlBodyPart": {
+            "Html": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum molestiae debitis nobis, quod sapiente qui voluptatum, placeat magni repudiandae accusantium fugit quas labore non rerum possimus, corrupti enim modi! Et.</p>"
+          },
+          "TitlePart": {
+            "Title": "My Paragraph"
+          },
+          "Article": {
+            "Subtitle": {
+              "Text": "This is what I do."
+            }
           }
         }
       ]
