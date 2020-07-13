@@ -11,6 +11,7 @@ using OrchardCore.Modules.Manifest;
     {
         "OrchardCore.ContentFields",
         "OrchardCore.Contents",
+        "OrchardCore.Taxonomies",
         "OrchardCore.Title"
     }
 )]

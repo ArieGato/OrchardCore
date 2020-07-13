@@ -1,0 +1,27 @@
+{
+  "name": "",
+  "displayName": "",
+  "description": "",
+  "author": "",
+  "website": "",
+  "version": "1",
+  "issetuprecipe": false,
+  "categories": "",
+  "tags": [],
+  "variables": {},
+  "steps": [
+    {
+      "name": "media",
+      "Files": [
+        {
+          "TargetPath": "my_images/about-bg.jpg",
+          "SourcePath": "./about-bg.jpg"
+        },
+        {
+          "TargetPath": "my_images/contact-bg.jpg",
+          "SourcePath": "./contact-bg.jpg"
+        }
+      ]
+    }
+  ]
+}
