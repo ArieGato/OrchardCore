@@ -41,16 +41,6 @@ namespace OrchardCore.RecipeMigrationIssue
                 .WithPart(nameof(MarkdownBodyPart))
                 .WithPart(nameof(CustomPart)));
 
-            _contentDefinitionManager.AlterPartDefinition(nameof(CustomPart), part => part
-                .WithField(nameof(CustomPart.Header), field => field
-                    .OfType(nameof(TextField))
-                    .WithDisplayName(nameof(CustomPart.Header))));
-
-            return 1;
-        }
-
-        public async Task<int> UpdateFrom1Async()
-        {
             await _recipeMigrator.ExecuteAsync("addarticle2.recipe.json", this);
 
             // ensure that the category taxonomy content item is present
@@ -69,20 +59,22 @@ namespace OrchardCore.RecipeMigrationIssue
                 LeavesOnly = true,
                 Unique = true
             };
-            _contentDefinitionManager.AlterPartDefinition(nameof(CustomPart), part => part
-                .WithField(nameof(CustomPart.Category), field => field
-                    .OfType(nameof(TaxonomyField))
-                    .WithDisplayName("Category")
-                    .WithSettings(taxonomyFieldSettings)));
 
-            return 2;
-        }
+            _contentDefinitionManager.AlterPartDefinition(nameof(CustomPart), part =>
+            {
+                part
+                    .WithField(nameof(CustomPart.Category), field => field
+                        .OfType(nameof(TaxonomyField))
+                        .WithDisplayName("Category")
+                        .WithSettings(taxonomyFieldSettings))
+                    .WithField(nameof(CustomPart.Header), field => field
+                        .OfType(nameof(TextField))
+                        .WithDisplayName(nameof(CustomPart.Header)));
+            });
 
-        public async Task<int> UpdateFrom2Async()
-        {
             await _recipeMigrator.ExecuteAsync("addmedia2.recipe.json", this);
 
-            return 3;
+            return 1;
         }
     }
 }
